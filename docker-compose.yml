@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+ proftpd:
+  build:
+   context: .
+  image: 'ralfherzog/proftpd-debian'
+  environment:
+   PROFTPD_SERVER_NAME: 'FTP Server'
+   PROFTPD_LISTEN_PORT: 21
+   PROFTPD_PASSIVE_PORTS: '50000 50100'
+   PROFTPD_MASQUERADE_ADDRESS: '1.2.3.4'
+   PROFTPD_DYN_MASQ_REFRESH: 28800
+   PROFTPD_MAX_INSTANCES: 30
+   PROFTPD_LDAP_SERVER: 'ldap.example.com'
+   PROFTPD_LDAP_BIND_DN: 'cn=admin,dc=example,dc=com'
+   PROFTPD_LDAP_BIND_DN_PASSWORD: 'supersecurepassword'
+   PROFTPD_LDAP_USERS: 'dc=users,dc=example,dc=com'
+   PROFTPD_LDAP_USERS_FILTER: '(\&(cn=\%v)(objectclass=person))'
+  ports:
+  - '21:21'
+  - '50000-50100:50000-50100'
+
+
+
+
+
+
+
+
+
+
