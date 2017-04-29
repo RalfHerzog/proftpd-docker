@@ -10,6 +10,7 @@ RUN apt-get update -qq && \
 
 ADD proftpd.conf /etc/proftpd/proftpd.conf
 ADD ldap.conf /etc/proftpd/ldap.conf
+ADD tls.conf /etc/proftpd/tls.conf
 
 EXPOSE 21
 EXPOSE 50000-50100

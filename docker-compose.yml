@@ -8,7 +8,7 @@ services:
   environment:
    PROFTPD_SERVER_NAME: 'FTP Server'
    PROFTPD_LISTEN_PORT: 21
-   PROFTPD_PASSIVE_PORTS: '50000 50100'
+   PROFTPD_PASSIVE_PORTS: '50000 50099'
    PROFTPD_MASQUERADE_ADDRESS: '1.2.3.4'
    PROFTPD_DYN_MASQ_REFRESH: 28800
    PROFTPD_MAX_INSTANCES: 30
@@ -17,16 +17,13 @@ services:
    PROFTPD_LDAP_BIND_DN_PASSWORD: 'supersecurepassword'
    PROFTPD_LDAP_USERS: 'dc=users,dc=example,dc=com'
    PROFTPD_LDAP_USERS_FILTER: '(\&(cn=\%v)(objectclass=person))'
+   PROFTPD_TLS_ENABLE: 'on'
+   PROFTPD_TLS_REQUIRED: 'off'
+   PROFTPD_TLS_RSA_CERTIFICATE_FILE: '/etc/ssl/certs/proftpd.crt'
+   PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE: '/etc/ssl/private/proftpd.key'
+  volumes:
+  - "./server.crt:/etc/ssl/certs/proftpd.crt:ro"
+  - "./server.key:/etc/ssl/private/proftpd.key:ro"
   ports:
   - '21:21'
-  - '50000-50100:50000-50100'
-
-
-
-
-
-
-
-
-
-
+  - '50000-50099:50000-50099'

@@ -52,6 +52,41 @@ then sed -i "s/{{PROFTPD_LDAP_GENERATE_HOMEDIR}}/on/" /etc/proftpd/ldap.conf
 else sed -i "s/{{PROFTPD_LDAP_GENERATE_HOMEDIR}}/${PROFTPD_LDAP_GENERATE_HOMEDIR}/" /etc/proftpd/ldap.conf
 fi
 
+# ProFTPD TLS config
+if [ -z "${PROFTPD_TLS_ENABLE}" ]
+then sed -i "s/{{PROFTPD_TLS_ENABLE}}/on/" /etc/proftpd/tls.conf
+else sed -i "s/{{PROFTPD_TLS_ENABLE}}/${PROFTPD_TLS_ENABLE}/" /etc/proftpd/tls.conf
+fi
+if [ -z "${PROFTPD_TLS_RSA_CERTIFICATE_FILE}" ]
+then sed -i "s/{{PROFTPD_TLS_RSA_CERTIFICATE_FILE}}/\/etc\/ssl\/certs\/proftpd\.crt/" /etc/proftpd/tls.conf
+else sed -i "s:{{PROFTPD_TLS_RSA_CERTIFICATE_FILE}}:${PROFTPD_TLS_RSA_CERTIFICATE_FILE}:" /etc/proftpd/tls.conf
+fi
+if [ -z "${PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}" ]
+then sed -i "s/{{PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}}/\/etc\/ssl\/private\/proftpd\.key/" /etc/proftpd/tls.conf
+else sed -i "s:{{PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}}:${PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}:" /etc/proftpd/tls.conf
+fi
+if [ -z "${PROFTPD_TLS_REQUIRED}" ]
+then sed -i "s/{{PROFTPD_TLS_REQUIRED}}/off/" /etc/proftpd/tls.conf
+else sed -i "s/{{PROFTPD_TLS_REQUIRED}}/${PROFTPD_TLS_REQUIRED}/" /etc/proftpd/tls.conf
+fi
+
+unset \
+ PROFTPD_SERVER_NAME \
+ PROFTPD_LISTEN_PORT \
+ PROFTPD_PASSIVE_PORTS \
+ PROFTPD_MASQUERADE_ADDRESS \
+ PROFTPD_DYN_MASQ_REFRESH \
+ PROFTPD_MAX_INSTANCES \
+ PROFTPD_LDAP_SERVER \
+ PROFTPD_LDAP_BIND_DN \
+ PROFTPD_LDAP_BIND_DN_PASSWORD \
+ PROFTPD_LDAP_USERS \
+ PROFTPD_LDAP_USERS_FILTER \
+ PROFTPD_LDAP_GENERATE_HOMEDIR \
+ PROFTPD_TLS_ENABLE \
+ PROFTPD_TLS_RSA_CERTIFICATE_FILE \
+ PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE \
+ PROFTPD_TLS_REQUIRED
 
 # Run ProFTPD
 exec "$@"
