@@ -4,11 +4,11 @@ services:
  proftpd:
   build:
    context: .
-  image: 'ralfherzog/proftpd-debian'
+  image: 'ralfherzog/proftpd-docker'
   environment:
    PROFTPD_SERVER_NAME: 'FTP Server'
    PROFTPD_LISTEN_PORT: 21
-   PROFTPD_PASSIVE_PORTS: '50000 50099'
+   PROFTPD_PASSIVE_PORTS: '49152 65534'
    PROFTPD_MASQUERADE_ADDRESS: '1.2.3.4'
    PROFTPD_DYN_MASQ_REFRESH: 28800
    PROFTPD_MAX_INSTANCES: 30
