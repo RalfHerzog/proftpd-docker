@@ -26,4 +26,4 @@ services:
   - "./server.key:/etc/ssl/private/proftpd.key:ro"
   ports:
   - '21:21'
-  - '50000-50099:50000-50099'
+  - '49152-65534:49152-65534'

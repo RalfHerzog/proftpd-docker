@@ -26,6 +26,13 @@ then sed -i "s/{{PROFTPD_MAX_INSTANCES}}/30/" /etc/proftpd/proftpd.conf
 else sed -i "s/{{PROFTPD_MAX_INSTANCES}}/${PROFTPD_MAX_INSTANCES}/" /etc/proftpd/proftpd.conf
 fi
 
+# http://www.proftpd.org/docs/modules/mod_core.html#AllowForeignAddress
+if [ -z "${PROFTPD_ALLOW_FOREIGN_ADDESS}" ]
+then sed -i "s/{{PROFTPD_ALLOW_FOREIGN_ADDESS}}/off/" /etc/proftpd/proftpd.conf
+else sed -i "s/{{PROFTPD_ALLOW_FOREIGN_ADDESS}}/${PROFTPD_ALLOW_FOREIGN_ADDESS}/" /etc/proftpd/proftpd.conf
+fi
+
+
 # ProFTPD LDAP config
 if [ -z "${PROFTPD_LDAP_SERVER}" ]
 then sed -i "s/{{PROFTPD_LDAP_SERVER}}/ldap.example.com/" /etc/proftpd/ldap.conf
