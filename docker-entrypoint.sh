@@ -72,6 +72,10 @@ if [ -z "${PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}" ]
 then sed -i "s/{{PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}}/\/etc\/ssl\/private\/proftpd\.key/" /etc/proftpd/tls.conf
 else sed -i "s:{{PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}}:${PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE}:" /etc/proftpd/tls.conf
 fi
+if [ -z "${PROFTPD_CA_CERTIFICATE_FILE}" ]
+then sed -i "/.*TLSCACertificateFile.*/d" /etc/proftpd/tls.conf
+else sed -i "s:{{PROFTPD_CA_CERTIFICATE_FILE}}:${PROFTPD_CA_CERTIFICATE_FILE}:" /etc/proftpd/tls.conf
+fi
 if [ -z "${PROFTPD_TLS_REQUIRED}" ]
 then sed -i "s/{{PROFTPD_TLS_REQUIRED}}/off/" /etc/proftpd/tls.conf
 else sed -i "s/{{PROFTPD_TLS_REQUIRED}}/${PROFTPD_TLS_REQUIRED}/" /etc/proftpd/tls.conf
@@ -93,6 +97,7 @@ unset \
  PROFTPD_TLS_ENABLE \
  PROFTPD_TLS_RSA_CERTIFICATE_FILE \
  PROFTPD_TLS_RSA_CERTIFICATE_KEY_FILE \
+ PROFTPD_CA_CERTIFICATE_FILE \
  PROFTPD_TLS_REQUIRED
 
 # Run ProFTPD

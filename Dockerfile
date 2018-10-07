@@ -13,7 +13,6 @@ ADD ldap.conf /etc/proftpd/ldap.conf
 ADD tls.conf /etc/proftpd/tls.conf
 
 EXPOSE 21
-EXPOSE 50000-50100
 
 ADD	docker-entrypoint.sh /usr/local/sbin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/sbin/docker-entrypoint.sh"]
