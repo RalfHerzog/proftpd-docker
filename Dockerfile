@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND noninteractive
 

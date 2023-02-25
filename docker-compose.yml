@@ -4,7 +4,7 @@ services:
   proftpd:
     build:
       context: .
-    image: 'ralfherzog/proftpd-docker'
+    image: 'ralfherzog/proftpd-docker:latest'
     environment:
       PROFTPD_SERVER_NAME: 'FTP Server'
       PROFTPD_LISTEN_PORT: 21
